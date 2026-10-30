@@ -1,167 +1,222 @@
-PromptForge
+# ⚡ PromptForge
 
-PromptForge is an AI-powered prompt enhancement and image generation platform. It helps users transform rough ideas into detailed image prompts, analyze the visual style of reference images, generate images, and compare original prompts with enhanced prompts.
+### Transform Ideas into Extraordinary AI Art
 
-Features
+PromptForge is an AI-powered prompt enhancement and image generation platform that transforms simple ideas into detailed, visually rich prompts. It helps users analyze reference-image styles, generate AI images, and compare results using original and enhanced prompts.
 
-•
-AI-powered prompt enhancement
+---
 
-•
-Reference-image style analysis
+## ✨ Features
 
-•
-Support for Gemini, Groq, and Cloudflare Workers AI
+* **AI-Powered Prompt Enhancement** – Transform simple text descriptions into detailed, expressive image-generation prompts.
+* **Reference Image Analysis** – Upload reference images to analyze their visual styles, composition, lighting, colors, and artistic elements.
+* **Multiple AI Providers** – Choose between Google Gemini, Groq, and Cloudflare Workers AI for prompt enhancement and analysis.
+* **AI Image Generation** – Generate images using supported models:
 
-•
-Image generation with SDXL Lightning, Flux, Flux.2 Klein, and Nano Banana
+  * SDXL Lightning
+  * FLUX
+  * FLUX.2 Klein
+  * Nano Banana
+* **Image Comparison** – Compare images generated from original and enhanced prompts.
+* **Interactive Interface** – Responsive, modern dark-themed interface designed for an intuitive user experience.
 
-•
-Original-versus-enhanced image comparison
+---
 
-•
-Responsive dark-themed React interface
+## 🛠️ Tech Stack
 
-Tech Stack
+| Category         | Technologies                                    |
+| ---------------- | ----------------------------------------------- |
+| Frontend         | React, Vite, Tailwind CSS                       |
+| Backend          | Python, FastAPI, Uvicorn                        |
+| AI Providers     | Google Gemini, Groq, Cloudflare Workers AI      |
+| Image Generation | SDXL Lightning, FLUX, FLUX.2 Klein, Nano Banana |
+| Version Control  | Git, GitHub                                     |
 
-•
-Frontend: React, Vite, Tailwind CSS
+---
 
-•
-Backend: FastAPI, Python, Uvicorn
+## 📂 Project Structure
 
-•
-AI Providers: Google Gemini, Groq, Cloudflare Workers AI
-
-Project Structure
-
-Plain Text
-
-
-art-prompt-enhancer-main/
+```text
+PromptForge/
+│
 ├── backend/
 │   ├── main.py
-│   └── requirements.txt
+│   ├── requirements.txt
+│   └── .gitignore
+│
 ├── frontend/
-│   ├── src/
 │   ├── public/
+│   ├── src/
 │   ├── package.json
-│   └── vite.config.js
+│   ├── package-lock.json
+│   ├── vite.config.js
+│   └── .gitignore
+│
 ├── .env.example
+├── .gitignore
 └── README.md
+```
 
+---
 
+## 📋 Requirements
 
-Requirements
+Make sure you have the following installed:
 
-•
-Python 3.10+
+* Python 3.10 or higher
+* Node.js 18 or higher
+* npm
+* Git
 
-•
-Node.js 18+
+### API Credentials
 
-•
-npm
+Configure the API credentials required by the providers you intend to use:
 
-•
-Google Gemini API key
+| Provider              | Required Credentials     |
+| --------------------- | ------------------------ |
+| Google Gemini         | Gemini API Key           |
+| Groq                  | Groq API Key             |
+| Cloudflare Workers AI | Account ID and API Token |
 
-•
-Cloudflare Account ID and API token
+---
 
-•
-Groq API key, if using Groq features
+## ⚙️ Installation & Setup
 
-Configuration
+Follow these steps to run PromptForge locally.
 
-Create a .env file in the project root:
+### 1. Clone the Repository
 
-Plain Text
+```bash
+git clone https://github.com/Awakenlegend/PromptForge.git
 
+cd PromptForge
+```
 
+### 2. Backend Setup
+
+Create and activate a Python virtual environment.
+
+**Windows:**
+
+```bash
+python -m venv .venv
+
+.venv\Scripts\activate
+```
+
+**macOS / Linux:**
+
+```bash
+python3 -m venv .venv
+
+source .venv/bin/activate
+```
+
+Install the dependencies:
+
+```bash
+pip install -r backend/requirements.txt
+```
+
+Start the FastAPI backend:
+
+```bash
+uvicorn backend.main:app --reload --port 8000
+```
+
+Backend URL:
+
+```text
+http://localhost:8000
+```
+
+Interactive API documentation:
+
+```text
+http://localhost:8000/docs
+```
+
+### 3. Frontend Setup
+
+Open another terminal and navigate to the frontend directory.
+
+```bash
+cd frontend
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Frontend URL:
+
+```text
+http://localhost:5173
+```
+
+---
+
+## 🔑 Environment Configuration
+
+Create a `.env` file in the project root directory.
+
+Add your API credentials:
+
+```env
 GOOGLE_API_KEY=your_google_api_key
-# GEMINI_API_KEY=your_google_api_key
+
 CLOUDFLARE_ACCOUNT_ID=your_cloudflare_account_id
 CLOUDFLARE_API_TOKEN=your_cloudflare_api_token
+
 GROQ_API_KEY=your_groq_api_key
-GEMINI_MODEL=gemini-3.8-flash
+
+GEMINI_MODEL=your_supported_gemini_model
+
 FRONTEND_ORIGINS=http://localhost:5173
+
 PORT=8000
+```
 
+Replace the placeholder values with your actual credentials.
 
+**Security Guidelines:**
 
-Never commit .env or expose API keys in frontend code.
+* Never commit `.env` files to GitHub.
+* Never expose API keys in frontend code.
+* Keep all provider credentials on the backend.
+* Use `.env.example` to document the required environment variables without including actual credentials.
 
-Installation
+---
 
-Backend
+## 🔌 API Endpoints
 
-Bash
+PromptForge uses a FastAPI backend to handle prompt enhancement, image analysis, image generation, and comparison.
 
+| Method | Endpoint           | Description                                  |
+| ------ | ------------------ | -------------------------------------------- |
+| GET    | `/health`          | Check API health status                      |
+| GET    | `/enhance-models`  | List available prompt-enhancement providers  |
+| GET    | `/analysis-models` | List available image-analysis providers      |
+| POST   | `/enhance`         | Enhance a text prompt                        |
+| POST   | `/upload`          | Upload and analyze a reference image         |
+| POST   | `/generate-image`  | Generate an AI image                         |
+| POST   | `/compare-images`  | Compare original and enhanced prompt results |
 
-python -m venv .venv
-source .venv/bin/activate       # Windows: .venv\Scripts\activate
-pip install -r backend/requirements.txt
-uvicorn backend.main:app --reload --port 8000
+---
 
+## 💡 Example: Prompt Enhancement
 
+Example request using cURL:
 
-Frontend
-
-Bash
-
-
-cd frontend
-npm install
-npm run dev
-
-
-
-Open the frontend at 
-
-http://localhost:5173.
-
-The backend is available at 
-
-http://localhost:8000. Interactive API documentation is available at 
-
-http://localhost:8000/docs.
-
-API Endpoints
-
-Method
-Endpoint
-Description
-GET
-/health
-Check API status
-GET
-/enhance-models
-List prompt-enhancement providers
-GET
-/analysis-models
-List image-analysis providers
-POST
-/enhance
-Enhance a text prompt
-POST
-/upload
-Analyze an uploaded image
-POST
-/generate-image
-Generate an image
-POST
-/compare-images
-Compare original and enhanced prompts
-
-
-
-
-Example: Enhance a Prompt
-
-Bash
-
-
+```bash
 curl -X POST http://localhost:8000/enhance \
   -H "Content-Type: application/json" \
   -d '{
@@ -169,42 +224,82 @@ curl -X POST http://localhost:8000/enhance \
     "model": "Flux",
     "enhance_provider": "groq-qwen"
   }'
+```
 
+The backend processes the original prompt using the selected AI provider and returns an enhanced prompt.
 
+---
 
-Image Upload Requirements
+## 🖼️ Image Upload Requirements
 
-•
-Request type: multipart/form-data
+| Requirement       | Specification       |
+| ----------------- | ------------------- |
+| Request Type      | multipart/form-data |
+| Accepted Files    | Image files only    |
+| Maximum File Size | 10 MB               |
 
-•
-Accepted files: images only
+---
 
-•
-Maximum file size: 10 MB
+## 📸 Screenshots
 
-Screenshots
+Screenshots of the PromptForge interface will be available here.
 
-Add the main workspace screenshot to docs/screenshots/ and replace the placeholder below.
+### Main Workspace
 
-Main Workspace
+<!-- Replace with your actual screenshot -->
 
-<!-- ![PromptForge main workspace](docs/screenshots/main-workspace.png) -->
+<!-- ![PromptForge Main Workspace](docs/screenshots/main-workspace.png) -->
 
+---
 
+## 🚀 Future Improvements
 
-  
+Potential improvements for future releases:
 
+* User authentication and personalized workspaces.
+* Prompt history and saved generations.
+* Additional image-generation models.
+* Advanced prompt optimization techniques.
+* Cloud-based image storage.
+* Download and export enhanced prompts.
 
+---
 
-License
+## 🤝 Contributing
 
-MIT License
+Contributions, suggestions, and feature requests are welcome.
 
-Copyright (c) Mohammed Farhan
+1. Fork the repository.
+2. Create a feature branch.
+3. Commit your changes.
+4. Push your branch.
+5. Open a Pull Request.
 
-This project is licensed under the 
+---
 
-MIT License.
+## 📄 License
 
-# PromptForge
+This project is licensed under the MIT License.
+
+Copyright (c) 2026 Mohammed Farhan.
+
+See the [LICENSE](LICENSE) file for details.
+
+---
+
+## 👨‍💻 Author
+
+**Mohammed Farhan**
+
+B.Tech Computer Science Engineering (AI & ML)
+
+* GitHub: [@Awakenlegend](https://github.com/Awakenlegend)
+* LinkedIn: [Mohammed Farhan](https://www.linkedin.com/in/awaken-legend/)
+
+---
+
+<p align="center">
+  Built with ❤️ and AI.
+  <br>
+  <strong>PromptForge — From Ideas to Images.</strong>
+</p>
