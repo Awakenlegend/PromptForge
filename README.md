@@ -242,7 +242,10 @@ The backend processes the original prompt using the selected AI provider and ret
 
 ## 📸 Screenshots
 
-Screenshots of the PromptForge interface will be available here.
+Screenshots of the PromptForge interface 
+<img width="1721" height="5324" alt="image" src="https://github.com/user-attachments/assets/9f42ad79-141f-481e-a644-a13817cf7727" />
+
+
 
 ### Main Workspace
 
