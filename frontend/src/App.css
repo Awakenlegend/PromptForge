@@ -1,0 +1,265 @@
+/*
+  Sora is loaded via Google Fonts in index.html.
+  No @font-face needed here.
+*/
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+  background: #02060f;
+}
+
+/* ─── Root wrapper ────────────────────────────────────────────────────────── */
+/*
+  .neural-app redefines the Tailwind CSS custom properties in its own scope.
+  Because Tailwind v4 generates utilities that reference var(--color-forge-*),
+  every descendant automatically picks up the new palette without !important
+  on each token. The remaining !important rules below handle specificity for
+  things that Tailwind generates with inline values.
+*/
+.neural-app {
+  --color-forge-bg:       #02060f;
+  --color-forge-panel:    #09111d;
+  --color-forge-surface:  #0b1421;
+  --color-forge-ink:      #ffffff;
+  --color-forge-muted:    #a2a9b8;
+  --color-forge-cyan:     #a8ccfc;
+  --color-forge-amber:    #f1d3a8;
+  --color-forge-amber-lt: #ffe6c1;
+  --font-sans:    'Sora', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Sora', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  overflow-x: clip;
+  color: #ffffff;
+  background: transparent !important;
+  font-family: 'Sora', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+}
+
+.neural-app .font-sans,
+.neural-app .font-display {
+  font-family: 'Sora', system-ui, -apple-system, 'Segoe UI', sans-serif !important;
+}
+
+/* ─── Background video layer ─────────────────────────────────────────────── */
+.neural-app .neural-background {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: #03060c;
+}
+
+.neural-app .neural-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.neural-app .neural-veil {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(140% 60% at 50% 40%,
+      rgba(6, 10, 18, .24) 0%, rgba(6, 10, 18, .11) 50%,
+      rgba(6, 10, 18, 0) 100%),
+    linear-gradient(180deg, rgba(6, 10, 18, .08) 0%,
+      rgba(6, 10, 18, .34) 100%);
+}
+
+/* ─── Main content sits above the fixed video ────────────────────────────── */
+.neural-app > main {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Top bar ────────────────────────────────────────────────────────────── */
+.neural-app header.fixed {
+  z-index: 50;
+  height: 72px !important;
+  border-bottom: 1px solid rgba(196, 214, 232, .18) !important;
+  background: rgba(3, 7, 14, .48) !important;
+  -webkit-backdrop-filter: blur(26px) saturate(.55);
+  backdrop-filter: blur(26px) saturate(.55);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .025);
+}
+
+.neural-app header.fixed > div {
+  width: min(1320px, calc(100% - 48px));
+  max-width: 1320px;
+  padding-inline: 0;
+}
+
+.neural-app header nav a {
+  color: #e6edf6;
+  font-size: 12px;
+  letter-spacing: .01em;
+  transition: color .18s ease, opacity .18s ease;
+}
+
+.neural-app header nav a:hover {
+  color: #ffffff;
+}
+
+/* ─── Panel & surface overrides ──────────────────────────────────────────── */
+.neural-app [class*="bg-forge-bg"] {
+  background-color: rgba(3, 8, 16, .82) !important;
+}
+
+.neural-app [class*="bg-forge-panel"],
+.neural-app [class*="bg-forge-surface"] {
+  background-color: rgba(7, 13, 23, .68) !important;
+  background-image:
+    linear-gradient(135deg, rgba(255, 226, 178, .035), transparent 42%, rgba(150, 196, 244, .045));
+  border-color: rgba(196, 214, 232, .20) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(.55);
+  backdrop-filter: blur(22px) saturate(.55);
+  box-shadow: 0 18px 50px rgba(2, 6, 14, .20);
+}
+
+.neural-app [class*="border-white/"] {
+  border-color: rgba(196, 214, 232, .22) !important;
+}
+
+/* ─── Typography colour helpers ──────────────────────────────────────────── */
+.neural-app .text-forge-ink    { color: #ffffff !important; }
+.neural-app .text-forge-muted  { color: #a2a9b8 !important; }
+.neural-app .text-forge-cyan   { color: #b1d1f5 !important; }
+.neural-app .text-forge-amber  { color: #f1d3a8 !important; }
+
+/* ─── Input / select / textarea ──────────────────────────────────────────── */
+.neural-app button,
+.neural-app a,
+.neural-app select,
+.neural-app textarea,
+.neural-app input {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.neural-app textarea,
+.neural-app select,
+.neural-app input:not([type="file"]) {
+  border-color: rgba(196, 214, 232, .25) !important;
+  background-color: rgba(3, 8, 16, .72) !important;
+  color: #ffffff !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .025);
+}
+
+.neural-app textarea::placeholder {
+  color: rgba(162, 169, 184, .55);
+}
+
+.neural-app option {
+  color: #ffffff;
+  background: #070d17;
+}
+
+/* ─── Primary action button ──────────────────────────────────────────────── */
+/* Targets the solid amber "Enhance prompt" / "Analyze image" buttons only */
+.neural-app button[class~="bg-forge-amber"]:not([class*="bg-forge-amber/"]) {
+  border: 1px solid rgba(255, 246, 229, .56);
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg, rgba(255, 226, 178, .96), rgba(214, 227, 245, .92)) !important;
+  color: #111722 !important;
+  box-shadow:
+    0 0 26px rgba(255, 224, 176, .13),
+    0 0 34px rgba(168, 204, 252, .10),
+    inset 0 1px 0 rgba(255, 255, 255, .68);
+  transition: box-shadow .2s ease, filter .2s ease, transform .2s ease;
+}
+
+.neural-app button[class~="bg-forge-amber"]:not([class*="bg-forge-amber/"]):hover:not(:disabled) {
+  filter: brightness(1.045);
+  box-shadow:
+    0 0 32px rgba(255, 224, 176, .20),
+    0 0 42px rgba(168, 204, 252, .14),
+    inset 0 1px 0 rgba(255, 255, 255, .78);
+}
+
+/* ─── Focus rings ────────────────────────────────────────────────────────── */
+.neural-app button:focus-visible,
+.neural-app a:focus-visible,
+.neural-app input:focus-visible,
+.neural-app textarea:focus-visible,
+.neural-app select:focus-visible {
+  outline: 2px solid #9fe0ff;
+  outline-offset: 3px;
+}
+
+/* ─── Amber border accent ────────────────────────────────────────────────── */
+.neural-app .border-forge-amber\/20,
+.neural-app .border-forge-amber\/30,
+.neural-app .border-forge-amber\/35 {
+  border-color: rgba(241, 211, 168, .34) !important;
+}
+
+/* ─── Hero section ───────────────────────────────────────────────────────── */
+.neural-app section[aria-labelledby="hero-title"] {
+  padding-top: clamp(7.5rem, 15vh, 10rem);
+  padding-bottom: clamp(2.5rem, 6vh, 4.5rem);
+}
+
+.neural-app section[aria-labelledby="hero-title"] h1 {
+  letter-spacing: -.035em;
+  text-shadow: 0 2px 28px rgba(2, 6, 14, .26);
+}
+
+.neural-app section[aria-labelledby="hero-title"] h1 span {
+  color: #f1d3a8;
+  text-shadow: 0 0 34px rgba(255, 224, 176, .11);
+}
+
+/* ─── Shadows ────────────────────────────────────────────────────────────── */
+.neural-app [class*="shadow-lg"] {
+  box-shadow: 0 18px 48px rgba(2, 6, 14, .38);
+}
+
+/* ─── Text selection ─────────────────────────────────────────────────────── */
+.neural-app ::selection {
+  color: #07101b;
+  background: rgba(177, 209, 245, .78);
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .neural-app header.fixed {
+    height: 64px !important;
+  }
+
+  .neural-app header.fixed > div {
+    width: calc(100% - 32px);
+  }
+
+  .neural-app .neural-veil {
+    background:
+      radial-gradient(130% 48% at 50% 44%,
+        rgba(6, 10, 18, .48) 0%, rgba(6, 10, 18, .32) 56%,
+        rgba(6, 10, 18, .08) 100%),
+      linear-gradient(180deg, rgba(6, 10, 18, .30) 0%,
+        rgba(6, 10, 18, .08) 28%, rgba(6, 10, 18, .36) 100%);
+  }
+
+  .neural-app section[aria-labelledby="hero-title"] {
+    padding-top: 7.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neural-app header nav a,
+  .neural-app button {
+    scroll-behavior: auto;
+  }
+}

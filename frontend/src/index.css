@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+/* ─── Design tokens ──────────────────────────────────────────────────────── */
+/*
+  Base palette — these live on :root.
+  The .neural-app wrapper in App.css redefines them in scope,
+  so all Tailwind utilities automatically inherit the correct values
+  inside the app without needing !important on every token.
+*/
+@theme {
+  /* Palette (matches .neural-app overrides in App.css) */
+  --color-forge-bg:       #02060f;
+  --color-forge-surface:  #0b1421;
+  --color-forge-panel:    #09111d;
+  --color-forge-amber:    #f1d3a8;
+  --color-forge-amber-lt: #ffe6c1;
+  --color-forge-cyan:     #a8ccfc;
+  --color-forge-ink:      #ffffff;
+  --color-forge-muted:    #a2a9b8;
+
+  /* Fonts — Sora for display + UI, JetBrains Mono for prompts */
+  --font-display: 'Sora', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-sans:    'Sora', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* ─── Base ───────────────────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: #02060f;
+    color: #ffffff;
+    font-family: 'Sora', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100%;
+    margin: 0;
+  }
+
+  /* Minimal scrollbar */
+  ::-webkit-scrollbar       { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.09);
+    border-radius: 99px;
+  }
+
+  /* Strip number-input spinners */
+  input[type="number"]                               { appearance: textfield; -moz-appearance: textfield; }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button   { -webkit-appearance: none; margin: 0; }
+}
+
+/* ─── Skeleton shimmer ───────────────────────────────────────────────────── */
+@keyframes shimmer {
+  from { background-position: -200% center; }
+  to   { background-position:  200% center; }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.03) 0%,
+    rgba(255,255,255,0.07) 50%,
+    rgba(255,255,255,0.03) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-shimmer {
+    animation: none;
+    background: rgba(255,255,255,0.04);
+  }
+}
